@@ -27,6 +27,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        //
+        if (\App::environment(['local', 'staging', 'production'])) {
+            // The environment is either local OR staging...
+            \URL::forceScheme('https');
+        }
+
         VerifyEmail::toMailUsing(function ($notifiable) {
             $verifyUrl = URL::temporarySignedRoute(
                 'verification.verify', Carbon::now()->addMinutes(60), ['id' => $notifiable->getKey()]
