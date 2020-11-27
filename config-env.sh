@@ -1,12 +1,2 @@
 #! / bin / bash
-heroku config:set APP_NAME=CafePOS
-heroku config:set APP_ENV=production
-heroku config:set APP_KEY=base64:sdhj1ACNuU1JURInR+GBo+jI0zPeihJh3rUrjQkA9/U=
-heroku config:set APP_DEBUG=true
-heroku config:set APP_URL=https://cafepos.herokuapp.com
-heroku config:set DB_CONNECTION=pgsql
-heroku config:set DB_HOST=ec2-54-235-116-235.compute-1.amazonaws.com
-heroku config:set DB_PORT=5432
-heroku config:set DB_DATABASE=d86csdm5fh4ie5
-heroku config:set DB_USERNAME=azrbjpljooiszy
-heroku config:set DB_PASSWORD=d9ccabc88175d018953be3a8ba7e2df313d735c4638c87a7e73fe5c82a0e1d11
+heroku config:set APP_NAME=CafePOS APP_ENV=production APP_KEY=base64:sdhj1ACNuU1JURInR+GBo+jI0zPeihJh3rUrjQkA9/U= APP_DEBUG=true APP_URL=https://cafepos.herokuapp.com DB_PORT=5432 DB_PASSWORD=b542e95e004404f4b1527f42b5c0f308fc1afd518454c3623dbf971070148f49 DB_USERNAME=oitbaukvznhdqo DB_DATABASE=d7r4qg63frliu7 DB_HOST=ec2-54-163-47-62.compute-1.amazonaws.com DB_CONNECTION=pgsql MAIL_DRIVER=smtp MAIL_HOST=smtp.elasticemail.com MAIL_PORT=2525 MAIL_PASSWORD=A471CBF013BED348360280CADDEBE3097CF8 MAIL_USERNAME=codevibes.id@gmail.com MAIL_ENCRYPTION=null
