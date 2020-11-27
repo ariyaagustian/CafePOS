@@ -47,24 +47,28 @@ class UserController extends Controller
     {
         if($request->get('password') != ''){
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
                 'role_id' => ['required'],
             ]);
             User::updateOrCreate(['id' => $request->product_id],
-                ['name' => $request->name,
+                ['fist_name' => $request->first_name,
+                'last_name' => $request->last_name,
                 'email' => $request->email,
                 'role_id' => $request->role_id,
                 'password' => Hash::make($request['password'])]);
         } else {
             $request->validate([
-                'name' => ['required', 'string', 'max:255'],
+                'first_name' => ['required', 'string', 'max:255'],
+                'last_name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255'],
                 'role_id' => ['required'],
             ]);
             User::updateOrCreate(['id' => $request->product_id],
-            ['name' => $request->name,
+            ['fist_name' => $request->first_name,
+            'last_name' => $request->last_name,
             'email' => $request->email,
             'role_id' => $request->role_id]);
         }

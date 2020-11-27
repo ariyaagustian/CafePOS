@@ -20,6 +20,8 @@ Auth::routes(['verify' => true]);
     Route::get('/dashboard', 'Superadmin\SuperadminController@index')->name('admin.dashboard')->middleware(['role:1,2,3,4,5', 'verified']);
     Route::resource('users','UserController')->middleware(['role:1,2', 'verified']);
     Route::resource('roles','RoleController')->middleware(['role:1,2', 'verified']);
+    Route::resource('merchants','MerchantController')->middleware(['role:1,2', 'verified']);
+    Route::resource('units','UnitController')->middleware(['role:1,2', 'verified']);
 
 
 

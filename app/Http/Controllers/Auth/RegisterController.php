@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\User;
 use App\Role;
 use App\Http\Controllers\Controller;
+use App\Merchant;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -70,9 +71,10 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
-        $data = Role::all();
+        $dataRoles = Role::all();
+        $dataMerchants = Merchant::all();
 
-        return view('auth.register', compact('data'));
+        return view('auth.register', compact('dataRoles', 'dataMerchants'));
     }
 
     /**
@@ -94,10 +96,13 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'username' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role_id' => ['required'],
+            'merchant_id' => ['required'],
         ]);
     }
 
@@ -110,9 +115,12 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
+            'first_name' => $data['first_name'],
+            'last_name' => $data['last_name'],
+            'username' => $data['username'],
             'email' => $data['email'],
             'role_id' => $data['role_id'],
+            'merchant_id' => $data['merchant_id'],
             'password' => Hash::make($data['password']),
         ]);
     }

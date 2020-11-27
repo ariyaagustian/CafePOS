@@ -17,11 +17,33 @@
                         <form method="POST" class="user" action="{{ route('register') }}">
                             @csrf
                             <div class="form-group">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                                    name="name" placeholder="Full Name" value="{{ old('name') }}" required
-                                    autocomplete="name" autofocus>
+                                <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                                    name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required
+                                    autocomplete="first_name" autofocus>
 
-                                @error('name')
+                                @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                                    name="last_name" placeholder="First Name" value="{{ old('last_name') }}" required
+                                    autocomplete="last_name" autofocus>
+
+                                @error('first_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <input id="username" type="text" class="form-control @error('username') is-invalid @enderror"
+                                    name="username" placeholder="Username" value="{{ old('username') }}" required
+                                    autocomplete="username" autofocus>
+
+                                @error('username')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -40,15 +62,30 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <select id="role_id" class="form-control" @error('role_id') is-invalid @enderror" name="role_id"
+                                <select id="role_id" class="form-control @error('role_id') is-invalid @enderror" name="role_id"
                                     value="{{ old('role_id') }}" required>
                                     <option value="" disabled selected>Select Role...</option>
-                                    @foreach ($data as $role)
+                                    @foreach ($dataRoles as $role)
                                     <option value="{{$role->id}}">{{$role->role_name}}</option>
                                     @endforeach
                                 </select>
 
                                 @error('role_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <select id="merchant_id" class="form-control @error('merchant_id') is-invalid @enderror" name="merchant_id"
+                                    value="{{ old('merchant_id') }}" required>
+                                    <option value="" disabled selected>Select Merchant...</option>
+                                    @foreach ($dataMerchants as $merchant)
+                                    <option value="{{$merchant->id}}">{{$merchant->merchant_name}}</option>
+                                    @endforeach
+                                </select>
+
+                                @error('merchant_id')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

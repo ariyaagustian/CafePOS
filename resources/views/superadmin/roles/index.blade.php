@@ -102,7 +102,7 @@
           $('#saveBtn').val("create-product");
           $('#product_id').val('');
           $('#productForm').trigger("reset");
-          $('#modelHeading').html("Create New Product");
+          $('#modelHeading').html("Create New Role");
           $('#ajaxModel').modal('show');
       });
 
@@ -111,7 +111,7 @@
         var uri = '{{ route("roles.edit", ":id") }}';
         var uri = uri.replace(':id', product_id);
         $.get(uri, function (data) {
-            $('#modelHeading').html("Edit Product");
+            $('#modelHeading').html("Edit Role");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
             $('#product_id').val(data.id);

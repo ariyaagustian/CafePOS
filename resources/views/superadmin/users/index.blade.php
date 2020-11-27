@@ -28,7 +28,8 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>Name</th>
+                        <th>Full Name</th>
+                        <th>Username</th>
                         <th>Email</th>
                         <th>Role</th>
                         <th width="110px">Action</th>
@@ -53,11 +54,22 @@
                     <input type="hidden" name="product_id" id="product_id">
                     @csrf
                     <div class="form-group">
-                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror"
-                            name="name" placeholder="Full Name" value="{{ old('name') }}" required autocomplete="name"
+                        <input id="first_name" type="text" class="form-control @error('first_name') is-invalid @enderror"
+                            name="first_name" placeholder="First Name" value="{{ old('first_name') }}" required autocomplete="first_name"
                             autofocus>
 
-                        @error('name')
+                        @error('first_name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
+                        <input id="last_name" type="text" class="form-control @error('last_name') is-invalid @enderror"
+                            name="last_name" placeholder="Last Name" value="{{ old('last_name') }}" required autocomplete="last_name"
+                            autofocus>
+
+                        @error('last_name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -66,7 +78,7 @@
                     <div class="form-group">
                         <input id="email" type="email" class="form-control  @error('email') is-invalid @enderror"
                             name="email" value="{{ old('email') }}" required autocomplete="email"
-                            placeholder="Email Address">
+                            placeholder="Email Address" readonly>
 
                         @error('email')
                         <span class="invalid-feedback" role="alert">
@@ -142,7 +154,12 @@
           ajax: "{{ route('users.index') }}",
           columns: [
               {data: 'DT_RowIndex', name: 'DT_RowIndex'},
-              {data: 'name', name: 'name'},
+              {data: null, name: 'full_name',
+                render: function ( data, type, row, meta ) {
+                    return data.first_name+' '+data.last_name;
+                }
+              },
+              {data: 'username', name: 'username'},
               {data: 'email', name: 'email'},
               {data: 'role.role_name', name: 'role.role_name'},
               {data: 'action', name: 'action', orderable: false, searchable: false},
@@ -152,8 +169,9 @@
       $('#createNewProduct').click(function () {
           $('#saveBtn').val("create-product");
           $('#product_id').val('');
+          $('#email').removeAttr('readonly');
           $('#productForm').trigger("reset");
-          $('#modelHeading').html("Create New Product");
+          $('#modelHeading').html("Create New User");
           $('#ajaxModel').modal('show');
       });
 
@@ -162,11 +180,13 @@
         var uri = '{{ route("users.edit", ":id") }}';
         var uri = uri.replace(':id', product_id);
         $.get(uri, function (data) {
-            $('#modelHeading').html("Edit Product");
+            $('#email').attr('readonly');
+            $('#modelHeading').html("Edit User");
             $('#saveBtn').val("edit-user");
             $('#ajaxModel').modal('show');
             $('#product_id').val(data.id);
-            $('#name').val(data.name);
+            $('#first_name').val(data.first_name);
+            $('#last_name').val(data.last_name);
             $('#email').val(data.email);
             $('#role_id').val(data.role_id);
         })
