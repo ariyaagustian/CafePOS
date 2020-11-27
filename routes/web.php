@@ -23,7 +23,4 @@ Auth::routes(['verify' => true]);
     Route::resource('merchants','MerchantController')->middleware(['role:1', 'verified']);
     Route::resource('units','UnitController')->middleware(['role:1', 'verified']);
 
-
-
-
 // Route::get('/home', 'HomeController@index')->name('home');
